@@ -1,4 +1,6 @@
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useLocation } from 'react-router-dom';
+import { useAppDispatch } from './hooks';
+import { setActiveBackground } from './state/slices/noun';
 
 import classes from './App.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,6 +12,12 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 
 
 function App() {
+  const dispatch = useAppDispatch();
+  const background = new URLSearchParams(useLocation().search).get("background");
+  if (background != null) {
+    dispatch(setActiveBackground(background === "cool"));
+  }
+
   return (
     <div className={classes.App}>
       <BrowserRouter>
