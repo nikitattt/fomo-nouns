@@ -23,6 +23,7 @@ import { default as globalConfig } from './config';
 import voteWebsocket from './middleware/voteWebsocket';
 import ethersProviderMiddleware from './middleware/ethersProvider';
 import alchemyWebsocketMiddleware from './middleware/alchemyWebsocket';
+import { BrowserRouter as Router } from "react-router-dom";
 
 
 dotenv.config();
@@ -48,7 +49,7 @@ export default function configureStore(preloadedState: any) {
       applyMiddleware(
         routerMiddleware(history), // for dispatching history actions
         // ... other middlewares ...
-        alchemyWebsocketMiddleware, 
+        alchemyWebsocketMiddleware,
         ethersProviderMiddleware,
         voteWebsocket
       ),
@@ -75,8 +76,10 @@ ReactDOM.render(
       <Web3ReactProvider getLibrary={
         (provider, connector) => new Web3Provider(provider)
       }>
-        <DAppProvider config={config}> 
-          <App />
+        <DAppProvider config={config}>
+          <Router>
+            <App />
+          </Router>
         </DAppProvider>
       </Web3ReactProvider>
     </React.StrictMode>

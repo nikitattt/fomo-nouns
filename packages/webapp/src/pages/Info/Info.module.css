@@ -1,0 +1,8 @@
+.Info {
+    background-color: #e1d7d5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

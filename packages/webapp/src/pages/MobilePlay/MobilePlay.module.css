@@ -1,0 +1,14 @@
+.MobilePlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bgGrey {
+    background-color: #d5d7e1;
+}
+
+.bgBeige {
+    background-color: #e1d7d5;
+}

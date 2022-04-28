@@ -1,15 +1,7 @@
 .App {
-  min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.bgGrey{
-  background-color: #d5d7e1;
-}
-
-.bgBeige {
-  background-color: #e1d7d5;
+  min-height: 100vh;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
