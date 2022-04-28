@@ -31,12 +31,20 @@ const Noun: React.FC<{ alt: string }> = props => {
     const svgBinary = buildSVG(parts, palette, background);
     setImg(btoa(svgBinary));
     dispatch(setActiveBackground(seed.background === 0));
+
+    let backgroundToReport;
+    if (seed.background === 0) {
+      backgroundToReport = "cool";
+    } else {
+      backgroundToReport = "warm";
+    }
+    console.log({ type: "newNoun", background: backgroundToReport });
   }, [dispatch, nextNounId, blockhash]);
 
   useEffect(() => {
     generateNoun();
   }, [generateNoun, blockhash]);
-  
+
 
   let htmlImg, htmlAlt;
   if (!nextNounId || !ethereumConnected) {
@@ -49,13 +57,13 @@ const Noun: React.FC<{ alt: string }> = props => {
 
   return (
     <div className={classes.imgWrapper}>
-        <img className={classes.img}
-          src={htmlImg}
-          alt={htmlAlt}
-          height="500px"
-          width="500px"
-        />
-      </div>
+      <img className={classes.img}
+        src={htmlImg}
+        alt={htmlAlt}
+        height="500px"
+        width="500px"
+      />
+    </div>
   );
 };
 
