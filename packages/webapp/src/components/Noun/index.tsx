@@ -32,13 +32,7 @@ const Noun: React.FC<{ alt: string }> = props => {
     setImg(btoa(svgBinary));
     dispatch(setActiveBackground(seed.background === 0));
 
-    let backgroundToReport;
-    if (seed.background === 0) {
-      backgroundToReport = "cool";
-    } else {
-      backgroundToReport = "warm";
-    }
-    console.log({ type: "newNoun", background: backgroundToReport });
+    console.log(`{ "type": "newNoun", "background": ${seed.background} }`);
   }, [dispatch, nextNounId, blockhash]);
 
   useEffect(() => {

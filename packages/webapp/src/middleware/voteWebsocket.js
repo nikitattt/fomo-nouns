@@ -66,7 +66,7 @@ const voteWebsocketMiddleware = () => {
       const { nounId, blockhash, vote } = msg;
       const voteMsg = { "action": "sendvote", "nounId": nounId, "blockhash": blockhash, "vote": vote };
       socket.send(JSON.stringify(voteMsg));
-      console.log({ type: "voteSent" })
+      console.log(`{ "type": "voteSent" }`)
     } catch (e) {
       console.error('Websocket message ill-formed');
       console.log(e);
