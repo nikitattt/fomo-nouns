@@ -3,14 +3,15 @@ button {
 }
 
 
-.voteButton{
+.voteButton {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     background-color: white;
-    border: 1px solid black;
+    opacity: 0.9;
+    box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.10);
     border-radius: 20px;
 
     height: 110px;
@@ -22,20 +23,21 @@ button {
 }
 
 @media (hover: hover) {
-    .voteButton:enabled:hover:not(.selected){
+    .voteButton:enabled:hover:not(.selected) {
         background: rgba(0, 0, 0, 0.1);
     }
 }
-.voteText{
+
+.voteText {
     font-size: 1.5em;
     font-weight: bold;
 }
 
-.voteEmojiText{
+.voteEmojiText {
     font-size: 3em;
 }
 
-.selected{
-    border: 2px solid black;
+.selected {
+    box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.10);
     background: rgb(127, 197, 156, .4);
 }
