@@ -7,8 +7,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Info from './pages/Info';
 import MobilePlay from './pages/MobilePlay';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-
 
 
 function App() {
