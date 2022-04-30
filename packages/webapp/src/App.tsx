@@ -24,7 +24,6 @@ function App() {
         <Switch>
           <Route exact path="/" component={Info} />
           <Route exact path="/mobile-play" component={MobilePlay} />
-          <Route exact path="/privacy-policy" component={PrivacyPolicy} />
         </Switch>
       </BrowserRouter>
     </div>
