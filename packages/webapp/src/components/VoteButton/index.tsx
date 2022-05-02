@@ -5,9 +5,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { sendVote } from '../../middleware/voteWebsocket';
 
 export enum EMOJI_TYPE {
-    dislike = '👎',
-    shrug = '🤷‍♂️',
-    like = '👍'
+  dislike = '👎',
+  shrug = '🤷‍♂️',
+  like = '👍'
 }
 
 const voteToEmoji: Record<VOTE_OPTIONS, string> = {
@@ -16,7 +16,11 @@ const voteToEmoji: Record<VOTE_OPTIONS, string> = {
   [VOTE_OPTIONS['voteLike']]: '👍'
 };
 
-const VoteButton: React.FC<{voteType: VOTE_OPTIONS}> = props => {
+function isLike(vote: VOTE_OPTIONS): boolean {
+  return vote === VOTE_OPTIONS['voteLike'] ? true : false;
+}
+
+const VoteButton: React.FC<{ voteType: VOTE_OPTIONS }> = props => {
   const activeAuction = useAppSelector(state => state.auction.activeAuction);
   const currentVote = useAppSelector(state => state.vote.currentVote);
   const wsConnected = useAppSelector(state => state.vote.connected);
@@ -31,17 +35,20 @@ const VoteButton: React.FC<{voteType: VOTE_OPTIONS}> = props => {
   const dispatch = useAppDispatch();
   const changeVote = () => {
     if (currentVote || !wsConnected) return;
-    
+
     dispatch(setCurrentVote(voteType));
-    dispatch(sendVote({"nounId": nextNounId, "blockhash": hash, "vote": voteType}));
+    dispatch(sendVote({ "nounId": nextNounId, "blockhash": hash, "vote": voteType }));
   }
 
   return (
-      <button className={currentVote === voteType ? clsx(classes.voteButton, classes.selected) : classes.voteButton} onClick={changeVote}
-      disabled={voteNotSelected || (!votingActive || activeAuction)}>
-        <span className={classes.voteEmojiText}> {voteToEmoji[voteType]} </span>
-        <span className={classes.voteText}> {voteCounts[voteType]} </span>
-      </button>
+    <button
+      className={currentVote === voteType ? clsx(classes.voteButton, isLike(currentVote!) ? classes.selectedLike : classes.selectedDislike) : classes.voteButton}
+      onClick={changeVote}
+      disabled={voteNotSelected || (!votingActive || activeAuction)}
+    >
+      <span className={classes.voteEmojiText}> {voteToEmoji[voteType]} </span>
+      <span className={classes.voteText}> {voteCounts[voteType]} </span>
+    </button>
   );
 };
-  export default VoteButton;
+export default VoteButton;
