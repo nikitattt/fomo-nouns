@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Info from './pages/Info';
 import MobilePlay from './pages/MobilePlay';
+import DevPlay from './pages/DevPlay';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Info} />
           <Route exact path="/mobile-play" component={MobilePlay} />
+          <Route exact path="/dev-play" component={DevPlay} />
         </Switch>
       </BrowserRouter>
     </div>
