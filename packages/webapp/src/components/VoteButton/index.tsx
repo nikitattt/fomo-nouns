@@ -51,4 +51,5 @@ const VoteButton: React.FC<{ voteType: VOTE_OPTIONS }> = props => {
     </button>
   );
 };
+
 export default VoteButton;
