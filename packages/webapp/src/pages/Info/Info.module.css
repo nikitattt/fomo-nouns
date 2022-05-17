@@ -5,8 +5,21 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+.title {
+    font-family: "Londrina Solid";
+    max-width: 600px;
+    text-align: center;
+    font-size: 3rem;
 }
 
 .badge {
     max-width: 200px;
+}
+
+.phone {
+    max-width: 300px;
 }
