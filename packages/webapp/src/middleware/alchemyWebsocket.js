@@ -10,10 +10,12 @@ import { resetAuctionEnd } from '../state/slices/auction';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
 import { checkForSettlement } from './ethersProvider';
 
+import dayjs from 'dayjs';
+
 
 // Define the Actions Intercepted by the Middleware
-const openEthereumSocket = (payload) => ({type: 'ethereumSocket/open', payload});
-const closeEthereumSocket = (payload) => ({type: 'ethereumSocket/close', payload});
+const openEthereumSocket = (payload) => ({ type: 'ethereumSocket/open', payload });
+const closeEthereumSocket = (payload) => ({ type: 'ethereumSocket/close', payload });
 
 
 // Define the Middleware
@@ -35,14 +37,14 @@ const alchemyWebsocketMiddleware = () => {
       } else if (data.id === blockId) {
         blockSubscription = data.result;
       }
-    } catch(e) {
+    } catch (e) {
       console.log('Error parsing Alchemy websocket message');
       console.log(e);
     }
   }
 
   const newBlockSubscriptionRequest = JSON.stringify({
-    "jsonrpc":"2.0",
+    "jsonrpc": "2.0",
     "id": blockId,
     "method": "eth_subscribe",
     "params": ["newHeads"]
@@ -64,6 +66,7 @@ const alchemyWebsocketMiddleware = () => {
     const blockNumber = Number(data.number); // Convert from hex
     const blockHash = data.hash;
     const logsBloom = data.logsBloom;
+    const blockTime = dayjs().valueOf();
 
     if (latestObservedBlock >= blockNumber) {
       console.log(`Minor block re-org, skipping repeat blocknumber ${blockNumber}`);
@@ -71,7 +74,7 @@ const alchemyWebsocketMiddleware = () => {
     } else {
       console.log(`Updating blocknumber ${blockNumber}`);
       latestObservedBlock = blockNumber;
-    }    
+    }
 
     // Check if settlement has occurred
     store.dispatch(checkForSettlement(logsBloom));
@@ -86,7 +89,7 @@ const alchemyWebsocketMiddleware = () => {
     });
 
     // Update the Redux block information
-    store.dispatch(setBlockAttr({'blocknumber': blockNumber, 'blockhash': blockHash}));
+    store.dispatch(setBlockAttr({ 'blockNumber': blockNumber, 'blockHash': blockHash, 'blockTime': blockTime }));
     store.dispatch(resetVotes());
   }
 
